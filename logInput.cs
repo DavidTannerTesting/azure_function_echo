@@ -18,12 +18,11 @@ namespace azure_function_echo
 
         [Function("logInput")]
         public HttpResponseData Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req
         ) {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
-            string body = await new StreamReader(requestData.Body).ReadToEndAsync();
-            dynamic json = JsonConvert.DeserializeObject(body);
-            _logger.LogInformation(json);
+            string body = await new StreamReader(req.Body).ReadToEndAsync();
+            _logger.LogInformation(body);
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
