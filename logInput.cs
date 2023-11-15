@@ -17,7 +17,7 @@ namespace azure_function_echo
         }
 
         [Function("logInput")]
-        public HttpResponseData Run(
+        public async Task<HttpResponseData> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req
         ) {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
